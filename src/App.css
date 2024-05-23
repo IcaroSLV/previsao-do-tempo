@@ -1,38 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 .App {
-  text-align: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(to right bottom, #8996E5, #52D3AA);
+    flex-direction: column;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.Title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Title h2 {
+    color: #333333;
+    font-family: "Roboto Mono", monospace;
+    font-weight: bolder;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.Title input[type="text"] {
+    padding: .5em .8em;
+    width: 15em;
+    height: 1.8em;
+    margin-right: .5em ;
+    border: none;
+    border-radius: 5px;
+    color: black;
 }
 
-.App-link {
-  color: #61dafb;
+.Title input[type="text"]:focus {
+    outline: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Title input[type="submit"] {
+    cursor: pointer;
+    height: 2.8em;
+    border: none;
+    background-color: transparent;
+    background-color: #5378AF;
+    color: white;
+    padding: .3em 1.3em;
+    border-radius: 5px;
 }
