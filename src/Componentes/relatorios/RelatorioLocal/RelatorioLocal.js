@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react"
 import style from './RelatorioLocal.module.css'
 
-function RelatorioLocal(dados) {
-
+function RelatorioLocal({ DadosLat, DadosLon, APIKey }) {
+    const [dados, setDados] = useState('')
     const [weatherIcon, setWeatherIcon] = useState('')
     const [day, setDay] = useState('')
-
     const [celsius, setCelsius] = useState('')
     const [farenheit, setFarenheit] = useState('')
-    const [kelvin] = useState(dados.data.main.temp)
+    const [kelvin, setKelvin] = useState('')
+
+    useEffect(() => {
+        if (DadosLat && DadosLon && APIKey) { 
+          fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${DadosLat}&lon=${DadosLon}&lang=pt_br&appid=${APIKey}`)
+            .then(resp => resp.json())
+            .then(data => {
+              setDados(data)
+              setKelvin(data.main.temp)
+            });
+        }
+      }, [DadosLat, DadosLon, APIKey]);
 
     useEffect(() => {
         const getCurrentDay = () => {
@@ -21,13 +31,15 @@ function RelatorioLocal(dados) {
     };
 
     setDay(getCurrentDay());
-    })
+    }, []);
 
     useEffect(() => {
-        setWeatherIcon(dados.data.weather[0].icon)
-        setCelsius((kelvin - 273.15).toFixed(1))
-        setFarenheit(((kelvin - 273.15) * 9/5 + 32).toFixed(1))
-    })
+        if(dados && dados.weather) {
+            setWeatherIcon(dados.weather[0].icon)
+            setCelsius((kelvin - 273.15).toFixed(1))
+            setFarenheit(((kelvin - 273.15) * 9/5 + 32).toFixed(1))
+        }
+    }, [dados, kelvin]);
 
     return(
         <>
@@ -38,7 +50,7 @@ function RelatorioLocal(dados) {
                 </div>
                 <div className={style.weatherInfo}>
                     <div>
-                        <img src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`}></img>
+                        <img src={`https://openweathermap.org/img/wn/${weatherIcon}@2x.png`} alt="Weather Icon"></img>
                     </div>
                     <div className={style.description}>
                         <div className={style.day}>
@@ -46,7 +58,7 @@ function RelatorioLocal(dados) {
                                 {day}
                             </div>
                             <div>
-                                {(dados.data.weather[0].description).toUpperCase()}
+                                {(dados.weather[0].description).toUpperCase()}
                             </div>
                         </div>
                         <div className={style.temp}>
@@ -65,4 +77,4 @@ function RelatorioLocal(dados) {
     );
 }
 
-export default RelatorioLocal
+export default RelatorioLocal;
