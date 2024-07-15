@@ -1,8 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 
-import RelatorioLocal from './Componentes/relatorios/RelatorioLocal/RelatorioLocal';
-import PrevisaoMaritima from './Componentes/relatorios/PrevisaoMaritima/PrevisaoMaritima';
 import PrevisaoClimatica from './Componentes/relatorios/PrevisaoClimatica/PrevisaoClimatica';
 
 function App() {
@@ -46,14 +44,6 @@ function App() {
         </form>
       </div>
       <div>
-        {DadosLat && DadosLon && (
-          <div>
-            <RelatorioLocal               
-              DadosLat={DadosLat}
-              DadosLon={DadosLon}
-              APIKey={APIKey} />
-          </div>
-        )}
         {DadosLat && DadosLon && (
           <div>
             <PrevisaoClimatica
