@@ -5,10 +5,6 @@ import ClimaCard from '../../Card/ClimaCard/ClimaCard';
 function PrevisaoClimatica({ DadosLat, DadosLon, APIKey }) {
 
   const [dados, setDados] = useState('')
-  const [weatherIcon, setWeatherIcon] = useState('')
-  const [day, setDay] = useState('')
-  const [celsius, setCelsius] = useState('')
-  const [farenheit, setFarenheit] = useState('')
   const [kelvin, setKelvin] = useState('')
 
   useEffect(() => {
