@@ -5,6 +5,7 @@ import ClimaCard from '../../Card/ClimaCard/ClimaCard';
 function PrevisaoClimatica({ DadosLat, DadosLon, APIKey }) {
 
   const [dados, setDados] = useState('')
+  const [day, setDay] = useState('')
   const [kelvin, setKelvin] = useState('')
 
   useEffect(() => {
@@ -32,14 +33,6 @@ function PrevisaoClimatica({ DadosLat, DadosLon, APIKey }) {
 
 setDay(getCurrentDay());
 }, []);
-
-useEffect(() => {
-  if(dados && dados.weather) {
-      setWeatherIcon(dados.weather[0].icon)
-      setCelsius((kelvin - 273.15).toFixed(1))
-      setFarenheit(((kelvin - 273.15) * 9/5 + 32).toFixed(1))
-  }
-}, [dados, kelvin]);
 
 const getDayOfWeek = (dateString) => {
   const date = new Date(dateString);
