@@ -5,8 +5,6 @@ import ClimaCard from '../../Card/ClimaCard/ClimaCard';
 function PrevisaoClimatica({ DadosLat, DadosLon, APIKey }) {
 
   const [dados, setDados] = useState('')
-  const [day, setDay] = useState('')
-  const [kelvin, setKelvin] = useState('')
 
   useEffect(() => {
     if (DadosLat && DadosLon && APIKey) {
@@ -14,25 +12,12 @@ function PrevisaoClimatica({ DadosLat, DadosLon, APIKey }) {
         .then(resp => resp.json())
         .then(data => {
           setDados(data)
-          setKelvin(data.list[0].main.temp)
           console.log(data.list[0])
         })
         .catch(error => console.error('Erro ao buscar dados:', error));
     }
   }, [DadosLat, DadosLon, APIKey]);
 
-  useEffect(() => {
-    const getCurrentDay = () => {
-    const date = new Date();
-    const daysOfWeek = [
-        'DOMINGO', 'SEGUNDA', 'TERÇA', 
-        'QUARTA', 'QUINTA', 'SEXTA', 'SÁBADO'
-    ];
-    return daysOfWeek[date.getDay()];
-};
-
-setDay(getCurrentDay());
-}, []);
 
 const getDayOfWeek = (dateString) => {
   const date = new Date(dateString);
